@@ -29,8 +29,8 @@ class Photo(models.Model):
     comment = models.CharField(max_length=144, blank=True)
     tags = models.ManyToManyField(
         Tag,
-        related_name='tags',
-        related_query_name='tag',
+        related_name='photos',
+        related_query_name='photo',
         )
 
     def __unicode__(self):
