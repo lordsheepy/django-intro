@@ -5,22 +5,26 @@ urlpatterns = patterns(
     'photoshare.views',
 
     url(r'^$',
-        'stub_view',
+        'front_view',
         name='front_page'),
 
-    url(r'^home/(\d+)/$',
-        'stub_view',
+    url(r'login/$',
+        'login_view',
+        name='login_page'),
+
+    url(r'^home/$',
+        'home_view',
         name="home_page"),
 
     url(r'^home/album/$',
         'stub_view',
-        name="album_view"),
+        name="album_page"),
 
     url(r'^home/photo/$',
         'stub_view',
-        name="photo_view"),
+        name="photo_page"),
 
     url(r'^home/tag/$',
         'stub_view',
-        name="tag_view"),
+        name="tag_page"),
 )
