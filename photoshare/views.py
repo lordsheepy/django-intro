@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 # from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import login
+from django.contrib.auth.decorators import login_required
+import models
 
 
 def stub_view(request, *args, **kwargs):
@@ -26,5 +28,11 @@ def login_view(request):
         template_name='photoshare/login.html',)
 
 
+@login_required
 def home_view(request):
-    return render(request, 'photoshare/home.html')
+    albums = models.Album.objects.filter(owner=request.user)
+    context = {'albums': albums}
+    # for album in albums:
+    #     name, src = album.name, album.photos.order_by('created')[0]
+    #     context[name] = src
+    return render(request, 'photoshare/home.html', context)
