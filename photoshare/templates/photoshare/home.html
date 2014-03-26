@@ -1,8 +1,12 @@
 {% extends "photoshare/base.html" %}
 
+{% block navbar %}
+            <li class="active"><a href="{% url 'photoshare.views.home_view' %}">Home</a></li>
+{% endblock %}
+
 {% block content %}
     {% for album in albums %}
-    <a href='/photoshare/album/{{ album.pk }}'>
+    <a href='/photoshare/home/album/{{ album.pk }}'>
     stuff </a>
     {% endfor %}
 {% endblock %}
