@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+from registration.signals import user_activated
+from django.dispatch import receiver
 
 # Create your models here.
 
@@ -31,6 +33,8 @@ class Photo(models.Model):
         Tag,
         related_name='photos',
         related_query_name='photo',
+        null=True,
+        blank=True,
         )
 
     def __unicode__(self):
@@ -54,3 +58,9 @@ class Album(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+@receiver(user_activated)
+def permissions(sender, **kwargs):
+    g = Group.objects.get(name='Authenticated')
+    g.user_set.add(kwargs['user'])

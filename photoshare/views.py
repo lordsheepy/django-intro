@@ -25,7 +25,7 @@ def login_view(request):
     request.next = 'photoshare/home'
     return login(
         request,
-        template_name='photoshare/login.html',)
+        template_name='registration/login.html',)
 
 
 def logout_view(request):

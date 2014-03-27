@@ -1,0 +1,5 @@
+Please click the link below to complete activation:
+
+{{ site.domain }}/accounts/activate/{{ activation_key }}
+
+You have {{ expiration_days }} day{% if expiration_days > 1 %}s{% endif %} to activate.
