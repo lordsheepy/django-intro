@@ -30,7 +30,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('front_page')
+    return redirect('/accounts/login/')
 
 
 @login_required
@@ -43,8 +43,8 @@ def home_view(request):
     return render(request, 'photoshare/home.html', context)
 
 
-def album_view(request):
-    pass
+def album_view(request, album):
+    return render(request, 'photoshare/album.html')
 
 
 def photo_view(request):

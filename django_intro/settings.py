@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'south',
     'photoshare',
     'bootstrap3',
+    'sorl.thumbnail',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,3 +94,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#Registration Settings
+
+ACCOUNT_ACTIVATION_DAYS = 14
+
+#Email settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'pyramid.microblog@gmail.com'
+EMAIL_HOST_PASSWORD = 'password'

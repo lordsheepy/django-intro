@@ -21,7 +21,7 @@ urlpatterns = patterns(
         name="home_page"),
 
     url(r'^home/album/(\d+)/$',
-        'stub_view',
+        'album_view',
         name="album_page"),
 
     url(r'^home/photo/(\d+)/$',
