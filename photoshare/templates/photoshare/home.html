@@ -6,7 +6,9 @@
 
 {% block content %}
     {% for album in albums %}
+    <div style="float:left">
     <a href="{% url 'photoshare.views.album_view' album.pk %}">
-    stuff </a>
+    {{album.name}} </a>
+    </div>
     {% endfor %}
 {% endblock %}

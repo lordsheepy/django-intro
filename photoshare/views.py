@@ -35,16 +35,16 @@ def logout_view(request):
 
 @login_required
 def home_view(request):
-    albums = models.Album.objects.filter(owner=request.user)
+    albums = models.Album.objects.filter(owner=request.user).all()
     context = {'albums': albums}
-    # for album in albums:
-    #     name, src = album.name, album.photos.order_by('created')[0]
-    #     context[name] = src
     return render(request, 'photoshare/home.html', context)
 
 
 def album_view(request, album):
-    return render(request, 'photoshare/album.html')
+    import pdb; pdb.set_trace()
+    images = models.Album.objects.filter(photos__album=album).all()
+    context = {'images': images}
+    return render(request, 'photoshare/album.html', context)
 
 
 def photo_view(request):
