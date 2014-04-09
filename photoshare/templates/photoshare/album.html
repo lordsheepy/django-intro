@@ -1,6 +1,12 @@
 {% extends "photoshare/base.html" %}
 {% load thumbnail %}
 {% block content %}
-    <h2>Album Template</h2>
-    <p>Albums</p>
+1
+    {% for image in album.photos.all %}
+    <div style="float:left">
+        {% thumbnail image.image "100x100" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+    </div>
+    {% endfor %}
 {% endblock %}

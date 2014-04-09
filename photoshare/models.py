@@ -31,8 +31,6 @@ class Photo(models.Model):
     comment = models.CharField(max_length=144, blank=True)
     tags = models.ManyToManyField(
         Tag,
-        related_name='photos',
-        related_query_name='photo',
         null=True,
         blank=True,
         )
@@ -50,8 +48,6 @@ class Album(models.Model):
         )
     photos = models.ManyToManyField(
         Photo,
-        related_name='albums',
-        related_query_name='album',
         blank=True,
         null=True,
         )

@@ -42,8 +42,8 @@ def home_view(request):
 
 def album_view(request, album):
     import pdb; pdb.set_trace()
-    images = models.Album.objects.filter(photos__album=album).all()
-    context = {'images': images}
+    album = models.Album.objects.get(pk=album)
+    context = {'album': album}
     return render(request, 'photoshare/album.html', context)
 
 
