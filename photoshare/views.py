@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import login, logout
 from django.contrib.auth.decorators import login_required
+from photoshare.forms import AlbumForm, PhotoForm, TagForm
 import models
+
 
 
 def stub_view(request, *args, **kwargs):
@@ -61,5 +63,49 @@ def tag_view(request, tag):
     return render(request, 'photoshare/tag.html', context)
 
 
-def add_photo_view(request):
-    pass
+@login_required
+def add_album_view(request):
+    if request.method == "POST":
+        album = models.Album(owner=request.user)
+        form = AlbumForm(request.POST, instance=album)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/photoshare/home/')
+    context = {
+        'page': 'photoshare.views.add_album_view',
+        'button': 'Add Album',
+        'form': AlbumForm,
+    }
+    return render(request, 'photoshare/add_view.html', context)
+
+
+@login_required
+def add_photo_view(request, album):
+    if request.method == "POST":
+        album = models.Album.get(pk=album)
+        photo = models.Photo(owner=request.user, album=album)
+        form = PhotoForm(request.POST, instance=photo)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/photoshare/photo/' + form.pk)
+    context = {
+        'page': 'photoshare.views.add_photo_view',
+        'button': 'Add Photo',
+        'form': PhotoForm,
+    }
+    return render(request, 'photoshare/add_view.html', context)
+
+
+@login_required
+def add_tag_view(request):
+    if request.method == "POST":
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect()
+    context = {
+        'page': 'photoshare.views.add_tag_view',
+        'button': 'Add Tag',
+        'form': TagForm,
+    }
+    return render(request, 'photoshare/add_view.html', context)

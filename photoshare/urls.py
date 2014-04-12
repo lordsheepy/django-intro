@@ -31,4 +31,16 @@ urlpatterns = patterns(
     url(r'^home/tag/(\w+)/$',
         'tag_view',
         name="tag_page"),
+
+    url(r'^add/tag/$',
+        'add_tag_view',
+        name="add_tag_page"),
+
+    url(r'^add/album/$',
+        'add_album_view',
+        name="add_album_page"),
+
+    url(r'^add/photo/(\d+)/$',
+        'add_photo_view',
+        name="add_photo_page"),
 )
