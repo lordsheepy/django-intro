@@ -13,12 +13,25 @@ class Tag(models.Model):
         return self.name
 
 
+class Album(models.Model):
+    name = models.CharField(max_length=128)
+    owner = models.ForeignKey(
+        User,
+        related_name='albums',
+        related_query_name='album',
+        )
+
+    def __unicode__(self):
+        return self.name
+
+
 class Photo(models.Model):
     owner = models.ForeignKey(
         User,
         related_name='photos',
         related_query_name='photo',
         )
+    album = models.ForeignKey(Album)
     height = models.IntegerField(blank=True, null=True, default=0)
     width = models.IntegerField(blank=True, null=True, default=0)
     image = models.ImageField(
@@ -39,21 +52,6 @@ class Photo(models.Model):
         return 'photo_id.' + unicode(self.pk)
 
 
-class Album(models.Model):
-    name = models.CharField(max_length=128)
-    owner = models.ForeignKey(
-        User,
-        related_name='albums',
-        related_query_name='album',
-        )
-    photos = models.ManyToManyField(
-        Photo,
-        blank=True,
-        null=True,
-        )
-
-    def __unicode__(self):
-        return self.name
 
 
 @receiver(user_activated)

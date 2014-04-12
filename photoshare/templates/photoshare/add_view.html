@@ -8,7 +8,7 @@
 {% block content %}
 
 <div style="max-width:250px;margin-left:auto;margin-right:auto;">
-<form method="post" action="{% url page %}" class="form">
+<form method="post" action="{% url page %}" class="form" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
     {% buttons %}

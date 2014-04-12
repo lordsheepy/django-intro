@@ -40,7 +40,7 @@ urlpatterns = patterns(
         'add_album_view',
         name="add_album_page"),
 
-    url(r'^add/photo/(\d+)/$',
+    url(r'^add/photo/$',
         'add_photo_view',
         name="add_photo_page"),
 )

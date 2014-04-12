@@ -44,7 +44,7 @@ def home_view(request):
 
 @login_required
 def album_view(request, album):
-    album = models.Album.objects.get(pk=album)
+    album = models.Photo.objects.filter(album=album).all()
     context = {'album': album}
     return render(request, 'photoshare/album.html', context)
 
@@ -80,18 +80,23 @@ def add_album_view(request):
 
 
 @login_required
-def add_photo_view(request, album):
+def add_photo_view(request):
     if request.method == "POST":
-        album = models.Album.get(pk=album)
-        photo = models.Photo(owner=request.user, album=album)
-        form = PhotoForm(request.POST, instance=photo)
+        import pdb; pdb.set_trace()
+        photo = models.Photo(owner=request.user)
+        form = PhotoForm(request.POST, request.FILES, instance=photo)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/photoshare/photo/' + form.pk)
+            return HttpResponseRedirect('/photoshare/home/')
+    else:
+        form = PhotoForm()
+        form.fields['album'].queryset = models.Album.objects.filter(
+            owner=request.user).all()
+
     context = {
         'page': 'photoshare.views.add_photo_view',
         'button': 'Add Photo',
-        'form': PhotoForm,
+        'form': form,
     }
     return render(request, 'photoshare/add_view.html', context)
 

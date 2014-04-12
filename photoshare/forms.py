@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ModelChoiceField
 from photoshare.models import Album, Photo, Tag
 
 
@@ -11,7 +11,7 @@ class AlbumForm(ModelForm):
 class PhotoForm(ModelForm):
     class Meta:
         model = Photo
-        fields = ['image', 'comment']
+        fields = ['image', 'album', 'comment']
 
 
 class TagForm(ModelForm):

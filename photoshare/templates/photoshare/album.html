@@ -8,7 +8,7 @@
 
 {% block content %}
 <div style="margin-left:auto;margin-right:auto;">
-    {% for image in album.photos.all %}
+    {% for image in album %}
     <div float=left>
         <a href="{% url 'photoshare.views.photo_view' image.pk %}">
         {% thumbnail image.image "200x200" as im %}
