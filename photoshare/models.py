@@ -7,7 +7,7 @@ from django.dispatch import receiver
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=32, unique=True)
 
     def __unicode__(self):
         return self.name

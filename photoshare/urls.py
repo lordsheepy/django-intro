@@ -43,4 +43,8 @@ urlpatterns = patterns(
     url(r'^add/photo/$',
         'add_photo_view',
         name="add_photo_page"),
+
+    url(r'^edit/photo/(\d+)$',
+        'edit_photo_view',
+        name="edit_photo_page"),
 )

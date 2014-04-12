@@ -3,13 +3,15 @@
 {% block navbar %}
             <li class="active"><a href="{% url 'photoshare.views.home_view' %}">Home</a></li>
             <li><a href="{% url 'photoshare.views.add_album_view' %}">Add Album</a></li>
+            <li><a href="{% url 'photoshare.views.add_photo_view' %}">Add Photo</a></li>
+
 {% endblock %}
 
 {% block content %}
     {% for album in albums %}
     <div style="float:left">
     <a href="{% url 'photoshare.views.album_view' album.pk %}">
-    {{album.name}} </a>
+    {{album.name}} </a><br>
     </div>
     {% endfor %}
 {% endblock %}

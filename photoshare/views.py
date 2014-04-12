@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 # from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import login, logout
 from django.contrib.auth.decorators import login_required
-from photoshare.forms import AlbumForm, PhotoForm, TagForm
+from photoshare.forms import AlbumForm, PhotoForm, TagForm, EditPhotoForm
 import models
 
 
@@ -82,7 +82,6 @@ def add_album_view(request):
 @login_required
 def add_photo_view(request):
     if request.method == "POST":
-        import pdb; pdb.set_trace()
         photo = models.Photo(owner=request.user)
         form = PhotoForm(request.POST, request.FILES, instance=photo)
         if form.is_valid():
@@ -114,3 +113,24 @@ def add_tag_view(request):
         'form': TagForm,
     }
     return render(request, 'photoshare/add_view.html', context)
+
+
+@login_required
+def edit_photo_view(request, photo_id):
+    photo = models.Photo.objects.get(pk=photo_id)
+    if request.method == "POST":
+        form = EditPhotoForm(request.POST, instance=photo)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/photoshare/home/photo/'+photo_id)
+    else:
+        form = EditPhotoForm(instance=photo)
+        form.fields['album'].queryset = models.Album.objects.filter(
+            owner=request.user).all()
+
+    context = {
+        'id': photo_id,
+        'button': 'Edit Photo',
+        'form': form,
+    }
+    return render(request, 'photoshare/edit_photo.html', context)

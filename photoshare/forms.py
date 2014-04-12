@@ -14,6 +14,12 @@ class PhotoForm(ModelForm):
         fields = ['image', 'album', 'comment']
 
 
+class EditPhotoForm(ModelForm):
+    class Meta:
+        model = Photo
+        fields = ['album', 'comment']
+
+
 class TagForm(ModelForm):
     class Meta:
         model = Tag
