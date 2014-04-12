@@ -54,11 +54,12 @@ def photo_view(request, photo):
     return render(request, 'photoshare/photo.html', context)
 
 
-def add_photo_view(request):
-    pass
-
-
+@login_required
 def tag_view(request, tag):
     photos = models.Photo.objects.filter(owner=request.user).filter(tags=tag).all()
     context = {'photos': photos, 'tag': tag}
     return render(request, 'photoshare/tag.html', context)
+
+
+def add_photo_view(request):
+    pass
