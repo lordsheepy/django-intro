@@ -25,10 +25,10 @@ urlpatterns = patterns(
         name="album_page"),
 
     url(r'^home/photo/(\d+)/$',
-        'stub_view',
+        'photo_view',
         name="photo_page"),
 
     url(r'^home/tag/(\w+)/$',
-        'stub_view',
+        'tag_view',
         name="tag_page"),
 )

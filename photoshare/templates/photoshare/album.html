@@ -1,12 +1,22 @@
 {% extends "photoshare/base.html" %}
 {% load thumbnail %}
+
+{% block navbar %}
+            <li class="active"><a href="{% url 'photoshare.views.home_view' %}">Home</a></li>
+{% endblock %}
+
 {% block content %}
-1
+<div style="margin-left:auto;margin-right:auto;">
     {% for image in album.photos.all %}
-    <div style="float:left">
-        {% thumbnail image.image "100x100" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    <div float=left>
+        <a href="{% url 'photoshare.views.photo_view' image.pk %}">
+        {% thumbnail image.image "200x200" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
         {% endthumbnail %}
+    <br>
+    {{ album.name }}
+    </a>
     </div>
+</div>
     {% endfor %}
 {% endblock %}

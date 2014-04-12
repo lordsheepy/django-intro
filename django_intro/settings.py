@@ -22,6 +22,8 @@ SECRET_KEY = 'SecretKey!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+THUMBNAIL_DEBUG = True
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -74,7 +76,13 @@ DATABASES = {
     }
 }
 
-MEDIA_ROOT = '/var/local/images'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+MEDIA_ROOT = '/var/local/images/'
 MEDIA_URL = '/images/'
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

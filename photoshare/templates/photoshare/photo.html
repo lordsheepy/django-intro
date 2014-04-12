@@ -1,6 +1,15 @@
-{% extends "base.html" %}
+{% extends "photoshare/base.html" %}
+
+{% block navbar %}
+            <li class="active"><a href="{% url 'photoshare.views.home_view' %}">Home</a></li>
+{% endblock %}
 
 {% block content %}
-    <h2>Photo Template</h2>
-    <p>Photos</p>
+<div style="margin-left:auto;margin-right:auto;">
+    <img src="{{ photo.image.url }}" width="{{ photo.width }}" height="{{ photo.height }}"/>
+        {% for tag in photo.tags.all %}
+        <br>
+        <a href="{% url 'photoshare.views.tag_view' tag.pk %}">{{tag.name}}</a>
+        {% endfor %}
+</div>
 {% endblock %}

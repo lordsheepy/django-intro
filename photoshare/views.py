@@ -40,20 +40,25 @@ def home_view(request):
     return render(request, 'photoshare/home.html', context)
 
 
+@login_required
 def album_view(request, album):
-    import pdb; pdb.set_trace()
     album = models.Album.objects.get(pk=album)
     context = {'album': album}
     return render(request, 'photoshare/album.html', context)
 
 
-def photo_view(request):
-    pass
+@login_required
+def photo_view(request, photo):
+    photo = models.Photo.objects.get(pk=photo)
+    context = {'photo': photo}
+    return render(request, 'photoshare/photo.html', context)
 
 
 def add_photo_view(request):
     pass
 
 
-def tag_view(request):
-    pass
+def tag_view(request, tag):
+    photos = models.Photo.objects.filter(owner=request.user).filter(tags=tag).all()
+    context = {'photos': photos, 'tag': tag}
+    return render(request, 'photoshare/tag.html', context)
